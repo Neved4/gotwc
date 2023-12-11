@@ -1,5 +1,5 @@
 ![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=fff)
-[![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc/actions/workflows/codeql.yml)
+[![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc-go/actions/workflows/codeql.yml)
 
 # `twc.go` - simple world clock in Go 🦦
 
