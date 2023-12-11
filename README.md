@@ -47,7 +47,6 @@ $ go build twc.go
 ### Usage
 
 ```
-flag provided but not defined: -z
 Usage of ./twc:
   -f string
     	Specify file path (default "tz-small.conf")
@@ -73,8 +72,8 @@ See also:
 
 ## Compatibility
 
-Runs on _**Linux**_, _**macOS**_ and _**\*BSD**_ systems on [`x86_64`] and
-[`arm64`], and compiles with and any other.
+Runs on _**Linux**_, _**macOS**_ and _**\*BSD**_ systems on both
+[`x86_64`] and [`arm64`].
 
 ## License
                  
