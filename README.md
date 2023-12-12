@@ -75,9 +75,14 @@ See also:
 Runs on _**Linux**_, _**macOS**_ and _**\*BSD**_ systems on both
 [`x86_64`] and [`arm64`].
 
+## Standards
+
+`twc.go` should run on [ISO 9945:2009][POSIX.1-2017] / [POSIX.1-2017][][^2]
+compatible systems, and produce [ISO 8601][][^3] output.
+
 ## License
                  
-`twc` is licensed under the terms of the [MIT License].
+`twc.go` is licensed under the terms of the [MIT License].
 
 See the [LICENSE](LICENSE) file for details.
 
@@ -86,6 +91,8 @@ See the [LICENSE](LICENSE) file for details.
 [`arm64`]: https://en.wikipedia.org/wiki/AArch64
 [`x86_64`]: https://en.wikipedia.org/wiki/X86-64
 [MIT License]: https://opensource.org/license/mit/
+[POSIX.1-2017]: https://pubs.opengroup.org/onlinepubs/9699919799/
+[ISO 8601]: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
@@ -94,6 +101,7 @@ See the [LICENSE](LICENSE) file for details.
 [^2]: _IEEE Std 1003.1-2017: Standard for Information Technology
     — Portable Operating System Interface (POSIX®)_, \
     ISO/IEC/IEEE 9945:2009/COR 2:2017. URL: https://pubs.opengroup.org/onlinepubs/9699919799/
-[^3]: _ISO/IEC 9899:2023: Standard for Information Technology
-    — Programming languages — C_, ISO/IEC 9899:2023. \
-    URL: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf
+[^3]: _ISO 8601-1:2019: Standard for Information Technology —
+    Date and time \
+    — Representations for information interchange_, ISO 8601-1:2019. \
+    URL: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
