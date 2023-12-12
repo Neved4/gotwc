@@ -4,16 +4,31 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 )
+
+func getConfigPath() string {
+	xdgConfigHome := os.Getenv("XDG_CONFIG_HOME")
+	homeDir, err := os.UserHomeDir()
+
+	if xdgConfigHome != "" {
+		return filepath.Join(xdgConfigHome, "twc", "tz.conf")
+	}
+
+	if err != nil {
+		return filepath.Join("$HOME", ".config", "twc", "tz.conf")
+	}
+
+	return filepath.Join(homeDir, ".config", "twc", "tz.conf")
+}
 
 func main() {
 	showHumanReadable := flag.Bool("h", false, "Print human-readable format")
 	formatSpecifier := flag.String("s", time.RFC3339, "Specify time format")
 	filePath := flag.String("f", "", "Specify timezone file")
 	timezoneFlag := flag.String("t", "", "Specify timezone directly")
-
 	flag.Parse()
 
 	format := *formatSpecifier
@@ -31,6 +46,21 @@ func main() {
 		fileContent, err := os.ReadFile(*filePath)
 		if err != nil {
 			fmt.Printf("error reading file: %s\n", err)
+			return
+		}
+
+		lines := strings.Split(string(fileContent), "\n")
+		for _, line := range lines {
+			line = strings.TrimSpace(line)
+			if line != "" && !strings.HasPrefix(line, "#") {
+				timezones = append(timezones, line)
+			}
+		}
+	} else {
+		configFile := getConfigPath()
+		fileContent, err := os.ReadFile(configFile)
+		if err != nil {
+			fmt.Printf("error reading config file: %s\n", err)
 			return
 		}
 
