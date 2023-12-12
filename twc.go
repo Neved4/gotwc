@@ -49,6 +49,9 @@ func main() {
 			return
 		}
 
+		fileContent = []byte(strings.ReplaceAll(string(fileContent),
+			"UTC-0", "UTC"))
+
 		lines := strings.Split(string(fileContent), "\n")
 		for _, line := range lines {
 			line = strings.TrimSpace(line)
@@ -63,6 +66,9 @@ func main() {
 			fmt.Printf("error reading config file: %s\n", err)
 			return
 		}
+
+		fileContent = []byte(strings.ReplaceAll(string(fileContent),
+			"UTC-0", "UTC"))
 
 		lines := strings.Split(string(fileContent), "\n")
 		for _, line := range lines {
