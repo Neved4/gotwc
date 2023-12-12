@@ -26,7 +26,7 @@ Australia/Sydney     2023-12-12 04:37:13
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   `version 2023c`.
 - 📦 **Self-contained** - zero dependencies,
-  lighweight (`1555 bytes`, `67 lines`).
+  lighweight (`2457 bytes`, `108 lines`).
 
 ## Getting Started
 
@@ -89,8 +89,8 @@ See the [LICENSE](LICENSE) file for details.
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-[^1]: _cfr._ `date` command that takes ≈ `931 ms` for ≈ `600` entries.
-    Measured with [`hyperfine`].
+[^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ `600`
+    entries. Measured with [`hyperfine`].
 [^2]: _IEEE Std 1003.1-2017: Standard for Information Technology
     — Portable Operating System Interface (POSIX®)_, \
     ISO/IEC/IEEE 9945:2009/COR 2:2017. URL: https://pubs.opengroup.org/onlinepubs/9699919799/
