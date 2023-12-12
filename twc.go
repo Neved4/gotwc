@@ -5,94 +5,99 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 )
 
+func handleError(err error, message string) {
+	if err != nil {
+		fmt.Printf("%s: %s\n", message, err)
+		os.Exit(1)
+	}
+}
+
+func getTimezones(filePath, timezoneFlag string) ([]string, error) {
+	if timezoneFlag != "" {
+		timezoneFlag = strings.Replace(timezoneFlag, "UTC-0", "UTC", 1)
+		return []string{timezoneFlag}, nil
+	}
+
+	tzFromEnv := os.Getenv("TZ")
+	if tzFromEnv != "" {
+		return []string{tzFromEnv}, nil
+	}
+
+	if filePath == "" {
+		filePath = getConfigPath()
+	}
+
+	return readTZFromFile(filePath)
+}
+
 func getConfigPath() string {
 	xdgConfigHome := os.Getenv("XDG_CONFIG_HOME")
 	homeDir, err := os.UserHomeDir()
+	handleError(err, "failed to get user home directory")
+
+	configPath := filepath.Join(homeDir, ".config", "twc", "tz.conf")
 
 	if xdgConfigHome != "" {
-		return filepath.Join(xdgConfigHome, "twc", "tz.conf")
+		configPath = filepath.Join(xdgConfigHome, "twc", "tz.conf")
 	}
 
+	return configPath
+}
+
+func readTZFromFile(filePath string) ([]string, error) {
+	fileContent, err := os.ReadFile(filePath)
 	if err != nil {
-		return filepath.Join("$HOME", ".config", "twc", "tz.conf")
+		return []string{"UTC"}, nil
 	}
 
-	return filepath.Join(homeDir, ".config", "twc", "tz.conf")
+	re := regexp.MustCompile(`(?m)^[ \t]*(#.*|\n)`)
+	fileContent = re.ReplaceAll(fileContent, []byte{})
+	fileContent = []byte(strings.ReplaceAll(string(fileContent),
+		"UTC-0", "UTC"))
+
+	var timezones []string
+	for _, line := range strings.Split(string(fileContent), "\n") {
+		line = strings.TrimSpace(line)
+		if line != "" && !strings.HasPrefix(line, "#") {
+			timezones = append(timezones, line)
+		}
+	}
+
+	return timezones, nil
 }
 
 func main() {
-	showHumanReadable := flag.Bool("h", false, "Print human-readable format")
+	showHumanRead := flag.Bool("h", false, "Print human-readable format")
 	formatSpecifier := flag.String("s", time.RFC3339, "Specify time format")
 	filePath := flag.String("f", "", "Specify timezone file")
 	timezoneFlag := flag.String("t", "", "Specify timezone directly")
 	flag.Parse()
 
 	format := *formatSpecifier
-	if *showHumanReadable {
+	if *showHumanRead {
 		format = "2006-01-02 15:04:05"
 	}
 
-	timezones := []string{}
-	timezones = []string{"UTC"}
-	if *timezoneFlag != "" {
-		timezones = []string{*timezoneFlag}
-	} else if tzFromEnv := os.Getenv("TZ"); tzFromEnv != "" {
-		timezones = []string{tzFromEnv}
-	} else if *filePath != "" {
-		fileContent, err := os.ReadFile(*filePath)
-		if err != nil {
-			fmt.Printf("error reading file: %s\n", err)
-			return
-		}
-
-		fileContent = []byte(strings.ReplaceAll(string(fileContent),
-			"UTC-0", "UTC"))
-
-		lines := strings.Split(string(fileContent), "\n")
-		for _, line := range lines {
-			line = strings.TrimSpace(line)
-			if line != "" && !strings.HasPrefix(line, "#") {
-				timezones = append(timezones, line)
-			}
-		}
-	} else {
-		configFile := getConfigPath()
-		fileContent, err := os.ReadFile(configFile)
-		if err != nil {
-			fmt.Printf("error reading config file: %s\n", err)
-			return
-		}
-
-		fileContent = []byte(strings.ReplaceAll(string(fileContent),
-			"UTC-0", "UTC"))
-
-		lines := strings.Split(string(fileContent), "\n")
-		for _, line := range lines {
-			line = strings.TrimSpace(line)
-			if line != "" && !strings.HasPrefix(line, "#") {
-				timezones = append(timezones, line)
-			}
-		}
-	}
+	timezones, err := getTimezones(*filePath, *timezoneFlag)
+	handleError(err, "failed to get timezones")
 
 	maxWidth := 0
 	for _, tz := range timezones {
 		tz = strings.TrimSpace(tz)
-		if tz == "" || strings.HasPrefix(tz, "#") {
-			continue
-		}
 		if len(tz) > maxWidth {
 			maxWidth = len(tz)
 		}
 	}
-	maxWidth += 1
+	maxWidth++
 
 	for _, tz := range timezones {
 		tz = strings.TrimSpace(tz)
+
 		if loc, err := time.LoadLocation(tz); err == nil {
 			timeInTZ := time.Now().UTC().In(loc)
 			fmt.Printf("%-*s %s\n", maxWidth, tz, timeInTZ.Format(format))
