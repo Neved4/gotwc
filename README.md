@@ -1,7 +1,7 @@
 ![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=fff)
 [![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc-go/actions/workflows/codeql.yml)
 
-# `twc.go` - simple world clock in Go 🦦
+# `twc.go` - Tiny world clock in Go! 🦦
 
 Fast, CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
@@ -19,8 +19,8 @@ Australia/Sydney     2023-12-12 04:37:13
 
 ### Highlights
 
-- 🚀 _**Fast**_ - **10X times faster than [`twc.c`], 65X times faster than
-  `date`**.[^1] \
+- 🚀 _**Fast**_ - **10X** times faster than [`twc.c`] and **65X** times
+  faster than `date`.[^1] \
   Only ≈ `7 ms` for one entry, and ≈ `177 ms` for ≈ 600
   entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
@@ -35,7 +35,7 @@ Australia/Sydney     2023-12-12 04:37:13
 Clone the repository:
 
 ```sh
-git clone https://github.com/Neved4/twc
+git clone https://github.com/Neved4/twc-go
 ```
 
 Build:
@@ -77,8 +77,8 @@ Runs on _**Linux**_, _**macOS**_ and _**\*BSD**_ systems on both
 
 ## Standards
 
-`twc.go` should run on [ISO 9945:2009][POSIX.1-2017] / [POSIX.1-2017][][^2]
-compatible systems, and produce [ISO 8601][][^3] output.
+`twc.go` should run on most [POSIX.1-2017][][^2] compatible systems and
+produce [ISO 8601][][^3] output.
 
 ## License
                  
@@ -96,12 +96,10 @@ See the [LICENSE](LICENSE) file for details.
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-[^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ `600`
+[^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
     entries. Measured with [`hyperfine`].
 [^2]: _IEEE Std 1003.1-2017: Standard for Information Technology
     — Portable Operating System Interface (POSIX®)_, \
     ISO/IEC/IEEE 9945:2009/COR 2:2017. URL: https://pubs.opengroup.org/onlinepubs/9699919799/
-[^3]: _ISO 8601-1:2019: Standard for Information Technology —
-    Date and time \
-    — Representations for information interchange_, ISO 8601-1:2019. \
+[^3]: _ISO 8601: Date and time \ — Representations for information interchange_, ISO 8601-1:2019. \
     URL: https://www.iso.org/obp/ui/#iso:std:iso:8601:-2:ed-1:v1:en
