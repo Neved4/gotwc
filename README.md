@@ -32,13 +32,18 @@ Australia/Sydney     2023-12-12 04:37:13
 
 ### Setup
 
-Clone the repository:
-
-```sh
-git clone https://github.com/Neved4/twc-go
+If you have [Homebrew] installed, just run:
+```console
+$ brew tap Neved4/homebrew-tap/twc-go
 ```
 
-Build:
+Alternatively, clone the repository:
+
+```console
+$ git clone https://github.com/Neved4/twc-go
+```
+
+Then build:
 
 ```console
 $ go build twc.go
@@ -87,6 +92,7 @@ produce [ISO 8601][][^3] output.
 See the [LICENSE](LICENSE) file for details.
 
 [`hyperfine`]: https://github.com/sharkdp/hyperfine
+[Homebrew]: https://brew.sh/
 [`twc.c`]: https://github.com/Neved4/twc
 [`arm64`]: https://en.wikipedia.org/wiki/AArch64
 [`x86_64`]: https://en.wikipedia.org/wiki/X86-64
