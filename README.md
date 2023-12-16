@@ -1,5 +1,6 @@
 ![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=fff)
 [![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc-go/actions/workflows/codeql.yml)
+[![Homebrew](https://img.shields.io/badge/Homebrew-tap-2AAB47?logo=homebrew&logoColor=959DA5&labelColor=2B3137)](https://github.com/Neved4/homebrew-tap/blob/main/Formula/twc-go.rb)
 
 # `twc.go` - Tiny world clock in Go! 🦦
 
