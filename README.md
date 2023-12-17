@@ -92,6 +92,12 @@ produce [ISO 8601][][^3] output.
 
 See the [LICENSE](LICENSE) file for details.
 
+
+## Related Projects
+
+- [oz/tz] - awesome cli time zone helper
+- [Neved4/twc][`twc.c`] - tiny world clock in C
+
 [`hyperfine`]: https://github.com/sharkdp/hyperfine
 [Homebrew]: https://brew.sh/
 [`twc.c`]: https://github.com/Neved4/twc
@@ -103,6 +109,7 @@ See the [LICENSE](LICENSE) file for details.
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [`version 2023c`]: https://www.iana.org/time-zones
+[oz/tz]: https://github.com/oz/tz
 
 [^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
     entries. Measured with [`hyperfine`].
