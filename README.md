@@ -27,7 +27,7 @@ Australia/Sydney     2023-12-12 04:37:13
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   [`version 2023c`].
 - 📦 **Self-contained** - zero dependencies,
-  lighweight (`2457 bytes`, `108 lines`).
+  lightweight (`110 lines`, `2458 bytes`).
 
 ## Getting Started
 
@@ -39,13 +39,11 @@ $ brew tap Neved4/homebrew-tap/twc-go
 ```
 
 Alternatively, clone the repository:
-
 ```console
 $ git clone https://github.com/Neved4/twc-go
 ```
 
 Then build:
-
 ```console
 $ go build twc.go
 ```
@@ -76,6 +74,13 @@ See also:
     environ(7)
 ```
 
+### Docker
+
+To compile the binary inside a [Docker] image, run:
+```sh
+docker build .
+```
+
 ## Compatibility
 
 Runs on _**Linux**_, _**macOS**_ and _**\*BSD**_ systems on both
@@ -92,15 +97,13 @@ produce [ISO 8601][][^3] output.
 
 See the [LICENSE](LICENSE) file for details.
 
-
 ## Related Projects
 
 - [oz/tz] - awesome cli time zone helper
+- [tzdiff] - cli timezone diff
 - [Neved4/twc][`twc.c`] - tiny world clock in C
-
+  
 [`hyperfine`]: https://github.com/sharkdp/hyperfine
-[Homebrew]: https://brew.sh/
-[`twc.c`]: https://github.com/Neved4/twc
 [`arm64`]: https://en.wikipedia.org/wiki/AArch64
 [`x86_64`]: https://en.wikipedia.org/wiki/X86-64
 [MIT License]: https://opensource.org/license/mit/
@@ -109,7 +112,11 @@ See the [LICENSE](LICENSE) file for details.
 [tz database]: https://en.wikipedia.org/wiki/Tz_database
 [tz entries]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [`version 2023c`]: https://www.iana.org/time-zones
+[Homebrew]: https://brew.sh/
+[Docker]: https://www.docker.com/
 [oz/tz]: https://github.com/oz/tz
+[tzdiff]: https://github.com/belgianbeer/tzdiff
+[`twc.c`]: https://github.com/Neved4/twc
 
 [^1]: _cfr._ `date` command takes ≈ `931 ms` when iterating over ≈ 600
     entries. Measured with [`hyperfine`].

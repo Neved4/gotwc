@@ -98,11 +98,13 @@ func main() {
 	for _, tz := range timezones {
 		tz = strings.TrimSpace(tz)
 
-		if loc, err := time.LoadLocation(tz); err == nil {
-			timeInTZ := time.Now().UTC().In(loc)
-			fmt.Printf("%-*s %s\n", maxWidth, tz, timeInTZ.Format(format))
-		} else {
+		loc, err := time.LoadLocation(tz)
+		if err != nil {
 			fmt.Printf("error loading timezone %s: %s\n", tz, err)
+			continue
 		}
+
+		timeInTZ := time.Now().UTC().In(loc)
+		fmt.Printf("%-*s %s\n", maxWidth, tz, timeInTZ.Format(format))
 	}
 }
