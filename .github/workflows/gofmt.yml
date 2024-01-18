@@ -1,0 +1,27 @@
+name: "Check gofmt"
+
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**/*.editorconfig'
+      - '**/*.gitattributes'
+      - '**/*.md'
+      - '**/*.yml'
+      - '**/LICENSE'
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  check-gofmt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check gofmt
+        uses: Jerome1337/gofmt-action@v1.0.5
+        with:
+          gofmt-path: './twc.go'
+          gofmt-flags: '-l -d'
