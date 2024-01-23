@@ -1,6 +1,6 @@
 FROM golang:latest
 WORKDIR /app
 COPY twc.go /app
-ENV CFLAGS=-O2
-RUN go build -o twc .
+ENV GOFLAGS="-ldflags=-s -w"
+RUN go build twc.go
 CMD ["./twc"]
