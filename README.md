@@ -57,25 +57,34 @@ gotwc [-h] [-f path] [-s format] [-t timezone] ...
 
 Options:
   -f path
-    	Read config from path (default "$HOME/.config/twc/tz.conf")
-  -h	Print in human-readable format
+      Read config from path (default "$HOME/.config/twc/tz.conf")
+  -h
+      Print in human-readable format
   -s format
-    	Set desired time format (e.g. "%Y-%m-%d")
+      Set desired time format (e.g. "%Y-%m-%d")
   -t timezone
-    	Set a specific timezone (e.g. "Asia/Tokyo")
+      specific timezone (e.g. "Asia/Tokyo")
 
 Examples:
-  $ gotwc -h -s %Y-%m-%d -t Asia/Tokyo
-      2006-01-02
+  Print Tokyo's date in a human-readable format with YY-MM-DD format:
+
+    $ twc -h -s %Y-%m-%d -t Asia/Tokyo
+    2024-01-02
   
-  $ TZ=America/Los_Angeles twz
-      2006-01-02T15:04:05-0800
+  Print date in Los Angeles using an environment variable for the timezone:
+  
+    $ TZ=America/Los_Angeles twz
+    2024-01-02T15:04:05-0800
 
 Environment:
-  TZ  Timezone to use when displaying dates.
+  XDG_CONFIG_HOME
+    When defined, it will be used to store the tz.conf file.
+  TZ
+    Timezone to use when displaying dates.
 
-Files
-  $HOME/.config/twc/tz.conf
+Files:
+  ~/.config/twc/tz.conf
+    Stores tz database entries to be displayed.
 
 See also:
   environ(7)
