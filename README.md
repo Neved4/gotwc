@@ -1,8 +1,8 @@
 ![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=fff)
-[![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/twc-go/actions/workflows/codeql.yml)
-[![Homebrew](https://img.shields.io/badge/Homebrew-tap-2AAB47?logo=homebrew&logoColor=959DA5&labelColor=2B3137)](https://github.com/Neved4/homebrew-tap/blob/main/Formula/twc-go.rb)
+[![CodeQL](https://github.com/github/docs/actions/workflows/codeql.yml/badge.svg)](https://github.com/Neved4/gotwc/actions/workflows/codeql.yml)
+[![Homebrew](https://img.shields.io/badge/Homebrew-tap-2AAB47?logo=homebrew&logoColor=959DA5&labelColor=2B3137)](https://github.com/Neved4/homebrew-tap/blob/main/Formula/gotwc.rb)
 
-# `twc.go` - Tiny world clock in Go! 🦦
+# `twc.go` - Tiny world clock in Go! 🚀
 
 Fast, CLI world clock that displays time zone information using
 [tz database] to read valid [tz entries].
@@ -35,17 +35,17 @@ Australia/Sydney     2023-12-12 04:37:13
 
 If you have [Homebrew] installed, just run:
 ```console
-$ brew tap Neved4/homebrew-tap/twc-go
+$ brew tap Neved4/homebrew-tap/gotwc
 ```
 
 Alternatively, clone the repository:
 ```console
-$ git clone https://github.com/Neved4/twc-go
+$ git clone https://github.com/Neved4/gotwc
 ```
 
 Then build:
 ```console
-$ go build twc.go
+$ go build
 ```
 
 ### Usage
