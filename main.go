@@ -10,14 +10,16 @@ import (
 	"time"
 )
 
-func handleError(err error, message string) {
+var progName string
+
+func errMsg(err error, message string) {
 	if err != nil {
 		fmt.Printf("%s: %s\n", message, err)
 		os.Exit(1)
 	}
 }
 
-func getTimezones(filePath, timezoneFlag string) ([]string, error) {
+func getTz(filePath, timezoneFlag string) ([]string, error) {
 	if timezoneFlag != "" {
 		timezoneFlag = strings.Replace(timezoneFlag, "UTC-0", "UTC", 1)
 		return []string{timezoneFlag}, nil
@@ -32,13 +34,13 @@ func getTimezones(filePath, timezoneFlag string) ([]string, error) {
 		filePath = getConfigPath()
 	}
 
-	return readTZFromFile(filePath)
+	return readTzFile(filePath)
 }
 
 func getConfigPath() string {
 	xdgConfigHome := os.Getenv("XDG_CONFIG_HOME")
 	homeDir, err := os.UserHomeDir()
-	handleError(err, "failed to get user home directory")
+	errMsg(err, "failed to get user home directory")
 
 	configPath := filepath.Join(homeDir, ".config", "twc", "tz.conf")
 
@@ -49,7 +51,7 @@ func getConfigPath() string {
 	return configPath
 }
 
-func readTZFromFile(filePath string) ([]string, error) {
+func readTzFile(filePath string) ([]string, error) {
 	fileContent, err := os.ReadFile(filePath)
 	if err != nil {
 		return []string{"UTC"}, nil
@@ -57,8 +59,7 @@ func readTZFromFile(filePath string) ([]string, error) {
 
 	re := regexp.MustCompile(`(?m)^[ \t]*(#.*|\n)`)
 	fileContent = re.ReplaceAll(fileContent, []byte{})
-	fileContent = []byte(strings.ReplaceAll(string(fileContent),
-		"UTC-0", "UTC"))
+	fileContent = []byte(strings.ReplaceAll(string(fileContent), "UTC-0", "UTC"))
 
 	var timezones []string
 	for _, line := range strings.Split(string(fileContent), "\n") {
@@ -71,7 +72,26 @@ func readTZFromFile(filePath string) ([]string, error) {
 	return timezones, nil
 }
 
+func usage() {
+    usage := `usage: %s [-h] [-f path] [-s format] [-t timezone] ...
+
+Options:
+  -f path
+        Read config from path (default "$HOME/.config/twc/tz.conf")
+  -h    Print in human-readable format
+  -s format
+        Set desired time format (e.g. "%%Y-%%m-%%d")
+  -t timezone
+        Set a specific timezone (e.g. "Asia/Tokyo")
+`
+    usageStr := fmt.Sprintf(usage, progName)
+    fmt.Fprint(flag.CommandLine.Output(), usageStr)
+}
+
 func main() {
+	progName = filepath.Base(os.Args[0])
+	flag.Usage = usage
+
 	showHumanRead := flag.Bool("h", false, "Print human-readable format")
 	formatSpecifier := flag.String("s", time.RFC3339, "Specify time format")
 	filePath := flag.String("f", "", "Specify timezone file")
@@ -83,8 +103,8 @@ func main() {
 		format = "2006-01-02 15:04:05"
 	}
 
-	timezones, err := getTimezones(*filePath, *timezoneFlag)
-	handleError(err, "failed to get timezones")
+	timezones, err := getTz(*filePath, *timezoneFlag)
+	errMsg(err, "failed to get timezones")
 
 	maxWidth := 0
 	for _, tz := range timezones {
@@ -104,7 +124,7 @@ func main() {
 			continue
 		}
 
-		timeInTZ := time.Now().UTC().In(loc)
-		fmt.Printf("%-*s %s\n", maxWidth, tz, timeInTZ.Format(format))
+		tzTime := time.Now().UTC().In(loc)
+		fmt.Printf("%-*s %s\n", maxWidth, tz, tzTime.Format(format))
 	}
 }
