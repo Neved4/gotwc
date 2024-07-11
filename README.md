@@ -68,12 +68,12 @@ Options:
 Examples:
   Print Tokyo's date in a human-readable format with YY-MM-DD format:
 
-    $ twc -h -s %Y-%m-%d -t Asia/Tokyo
-    2024-01-02
+    $ gotwc -h -s %Y-%m-%d -t Asia/Tokyo
+    Asia/Tokyo  2024-01-02 15:04:05
   
   Print date in Los Angeles using an environment variable for the timezone:
   
-    $ TZ=America/Los_Angeles twz
+    $ TZ=America/Los_Angeles gotwc
     2024-01-02T15:04:05-0800
 
 Environment:
