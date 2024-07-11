@@ -73,7 +73,7 @@ func readTzFile(filePath string) ([]string, error) {
 }
 
 func usage() {
-    usage := `usage: %s [-h] [-f path] [-s format] [-t timezone] ...
+	usage := `usage: %s [-h] [-f path] [-s format] [-t timezone] ...
 
 Options:
   -f path
@@ -84,8 +84,8 @@ Options:
   -t timezone
         Set a specific timezone (e.g. "Asia/Tokyo")
 `
-    usageStr := fmt.Sprintf(usage, progName)
-    fmt.Fprint(flag.CommandLine.Output(), usageStr)
+	usageStr := fmt.Sprintf(usage, progName)
+	fmt.Fprint(flag.CommandLine.Output(), usageStr)
 }
 
 func main() {
