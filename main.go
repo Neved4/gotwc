@@ -10,7 +10,9 @@ import (
 	"time"
 )
 
-var progName string
+var (
+	progName   string
+)
 
 func errMsg(err error, message string) {
 	if err != nil {
@@ -19,10 +21,10 @@ func errMsg(err error, message string) {
 	}
 }
 
-func getTz(filePath, timezoneFlag string) ([]string, error) {
-	if timezoneFlag != "" {
-		timezoneFlag = strings.Replace(timezoneFlag, "UTC-0", "UTC", 1)
-		return []string{timezoneFlag}, nil
+func getTz(filePath, tzFlag string) ([]string, error) {
+	if tzFlag != "" {
+		tzFlag = strings.Replace(tzFlag, "UTC-0", "UTC", 1)
+		return []string{tzFlag}, nil
 	}
 
 	tzFromEnv := os.Getenv("TZ")
@@ -92,18 +94,19 @@ func main() {
 	progName = filepath.Base(os.Args[0])
 	flag.Usage = usage
 
-	showHumanRead := flag.Bool("h", false, "Print human-readable format")
-	formatSpecifier := flag.String("s", time.RFC3339, "Specify time format")
+	fmtHuman := flag.Bool("h", false, "Print human-readable format")
+	fmtSpec := flag.String("s", time.RFC3339, "Specify time format")
 	filePath := flag.String("f", "", "Specify timezone file")
-	timezoneFlag := flag.String("t", "", "Specify timezone directly")
+	tzFlag := flag.String("t", "", "Specify timezone directly")
+
 	flag.Parse()
 
-	format := *formatSpecifier
-	if *showHumanRead {
+	format := *fmtSpec
+	if *fmtHuman {
 		format = "2006-01-02 15:04:05"
 	}
 
-	timezones, err := getTz(*filePath, *timezoneFlag)
+	timezones, err := getTz(*filePath, *tzFlag)
 	errMsg(err, "failed to get timezones")
 
 	maxWidth := 0
