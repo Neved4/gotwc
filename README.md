@@ -31,7 +31,13 @@ Australia/Sydney     2023-12-12 04:37:13
 
 ## Getting Started
 
-### Setup
+### Prerequisites
+
+If you are building [`gotwc`], you'll need:
+
+- A [Go] compiler
+
+### Installing
 
 If you have [Homebrew] installed, just run:
 ```console
@@ -109,7 +115,7 @@ produce [ISO 8601][][^iso8601] output.
 
 ## License
                  
-`gotwc` is licensed under the terms of the [MIT License].
+[`gotwc`] is licensed under the terms of the [MIT License].
 
 See the [LICENSE](LICENSE) file for details.
 
@@ -119,6 +125,8 @@ See the [LICENSE](LICENSE) file for details.
 - [tzdiff] - cli timezone diff
 - [Neved4/twc][`twc.c`] - tiny world clock in C
   
+[Go]: https://go.dev/
+[`gotwc`]: https://github.com/Neved4/gotwc
 [`hyperfine`]: https://github.com/sharkdp/hyperfine
 [`arm64`]: https://en.wikipedia.org/wiki/AArch64
 [`x86_64`]: https://en.wikipedia.org/wiki/X86-64
