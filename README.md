@@ -40,25 +40,25 @@ If you are building [`gotwc`], you'll need:
 ### Installing
 
 If you have [Homebrew] installed, just run:
-```console
-$ brew install Neved4/homebrew-tap/gotwc
+```shell
+brew install Neved4/homebrew-tap/gotwc
 ```
 
 Alternatively, clone the repository:
-```console
-$ git clone https://github.com/Neved4/gotwc
+```shell
+git clone https://github.com/Neved4/gotwc
 ```
 
 Then build:
-```console
-$ go build
+```shell
+go build
 ```
 
 ### Usage
 
 The following usage and options are available:
 
-```
+```text
 gotwc [-h] [-f path] [-s format] [-t timezone] ...
 
 Options:
@@ -99,7 +99,7 @@ See also:
 ### Docker
 
 To compile the binary inside a [Docker] image, run:
-```sh
+```shell
 docker build .
 ```
 
