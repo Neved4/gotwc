@@ -41,7 +41,7 @@ If you are building [`gotwc`], you'll need:
 
 If you have [Homebrew] installed, just run:
 ```console
-$ brew tap Neved4/homebrew-tap/gotwc
+$ brew install Neved4/homebrew-tap/gotwc
 ```
 
 Alternatively, clone the repository:
