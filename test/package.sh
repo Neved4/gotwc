@@ -1,6 +1,6 @@
 #!/bin/sh
 
-version=1.2.1
+version=1.2.0
 
 GOOS=darwin GOARCH=amd64 go build -o twc twc.go
 tar -czf twc-$version-x86_64-darwin.tar.gz twc
