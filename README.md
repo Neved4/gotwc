@@ -74,11 +74,6 @@ Options:
   -t timezone
       specific timezone (e.g. "Asia/Tokyo")
 
-Formatting uses ISO/IEC 9899 (`strftime`) with the usual extensions,
-including `%C`, `%D`, `%E*`, `%e`, `%G`, `%g`, `%h`, `%k`, `%l`, `%n`,
-`%O*`, `%R`, `%r`, `%s`, `%T`, `%t`, `%u`, `%V`, `%z`, and `%+`,
-powered by [`github.com/ncruces/go-strftime`](https://github.com/ncruces/go-strftime).
-
 Examples:
   Print Tokyo's date in a human-readable format with YY-MM-DD format:
 
@@ -101,6 +96,7 @@ Files:
     Stores tz database entries to be displayed.
 
 See also:
+  strftime(3)
   environ(7)
 ```
 
