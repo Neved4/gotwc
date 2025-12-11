@@ -95,9 +95,8 @@ Files:
   ~/.config/twc/tz.conf
     Stores tz database entries to be displayed.
 
-See also:
-  strftime(3)
-  environ(7)
+See Also:
+  strftime(3), environ(7)
 ```
 
 ### Docker
