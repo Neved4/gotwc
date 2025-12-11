@@ -8,11 +8,11 @@ import (
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/ncruces/go-strftime"
 )
 
-var (
-	progName   string
-)
+var progName string
 
 func errMsg(err error, message string) {
 	if err != nil {
@@ -61,7 +61,8 @@ func readTzFile(filePath string) ([]string, error) {
 
 	re := regexp.MustCompile(`(?m)^[ \t]*(#.*|\n)`)
 	fileContent = re.ReplaceAll(fileContent, []byte{})
-	fileContent = []byte(strings.ReplaceAll(string(fileContent), "UTC-0", "UTC"))
+	normalized := strings.ReplaceAll(string(fileContent), "UTC-0", "UTC")
+	fileContent = []byte(normalized)
 
 	var timezones []string
 	for _, line := range strings.Split(string(fileContent), "\n") {
@@ -82,7 +83,7 @@ Options:
         Read config from path (default "$HOME/.config/twc/tz.conf")
   -h    Print in human-readable format
   -s format
-        Set desired time format (e.g. "%%Y-%%m-%%d")
+        Set desired strftime time format (e.g. "%%Y-%%m-%%d")
   -t timezone
         Set a specific timezone (e.g. "Asia/Tokyo")
 `
@@ -95,7 +96,8 @@ func main() {
 	flag.Usage = usage
 
 	fmtHuman := flag.Bool("h", false, "Print human-readable format")
-	fmtSpec := flag.String("s", time.RFC3339, "Specify time format")
+	defaultFmt := "%Y-%m-%dT%H:%M:%S%z"
+	fmtSpec := flag.String("s", defaultFmt, "Specify time format")
 	filePath := flag.String("f", "", "Specify timezone file")
 	tzFlag := flag.String("t", "", "Specify timezone directly")
 
@@ -103,7 +105,7 @@ func main() {
 
 	format := *fmtSpec
 	if *fmtHuman {
-		format = "2006-01-02 15:04:05"
+		format = "%Y-%m-%d %H:%M:%S"
 	}
 
 	timezones, err := getTz(*filePath, *tzFlag)
@@ -128,6 +130,10 @@ func main() {
 		}
 
 		tzTime := time.Now().UTC().In(loc)
-		fmt.Printf("%-*s %s\n", maxWidth, tz, tzTime.Format(format))
+		fmt.Printf("%-*s %s\n", maxWidth, tz, formatTime(tzTime, format))
 	}
+}
+
+func formatTime(t time.Time, format string) string {
+	return strftime.Format(format, t)
 }

@@ -26,6 +26,8 @@ Australia/Sydney     2023-12-12 04:37:13
   entries.
 - 🔒 _**Robust**_ - tested to work with all [tz database] entries,
   [`version 2023c`].
+- 🧭 _**Strftime-friendly**_ - accepts ISO C `strftime` with the common
+  extensions (e.g. `%C`, `%D`, `%G`, `%O*`, `%+`).
 - 📦 **Self-contained** - zero dependencies,
   lightweight (`110 lines`, `2458 bytes`).
 
@@ -67,9 +69,15 @@ Options:
   -h
       Print in human-readable format
   -s format
-      Set desired time format (e.g. "%Y-%m-%d")
+      Set desired strftime time format
+      (default "%Y-%m-%dT%H:%M:%S%z")
   -t timezone
       specific timezone (e.g. "Asia/Tokyo")
+
+Formatting uses ISO/IEC 9899 (`strftime`) with the usual extensions,
+including `%C`, `%D`, `%E*`, `%e`, `%G`, `%g`, `%h`, `%k`, `%l`, `%n`,
+`%O*`, `%R`, `%r`, `%s`, `%T`, `%t`, `%u`, `%V`, `%z`, and `%+`,
+powered by [`github.com/ncruces/go-strftime`](https://github.com/ncruces/go-strftime).
 
 Examples:
   Print Tokyo's date in a human-readable format with YY-MM-DD format:
